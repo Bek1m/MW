@@ -33,6 +33,11 @@ class PostController extends Controller
 
     public function create()
     {
+        \Log::info('PostController create method called', [
+            'user' => auth()->user(),
+            'is_admin' => auth()->user()->is_admin
+        ]);
+
         $categories = Category::all();
         $types = ['announcement', 'event', 'sermon', 'news'];
         

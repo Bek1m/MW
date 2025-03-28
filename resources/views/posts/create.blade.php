@@ -66,8 +66,7 @@
                         
                         <div class="mb-4">
                             <label for="categories" class="form-label fw-bold">Categories</label>
-                            <select class="form-select {{ $errors->has('categories') ? 'is-invalid' : '' }}" 
-                                id="categories" name="categories[]" multiple>
+                            <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple>
                                 @forelse($categories ?? [] as $category)
                                     <option value="{{ $category->id }}" 
                                         {{ (is_array(old('categories')) && in_array($category->id, old('categories'))) ? 'selected' : '' }}>
