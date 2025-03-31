@@ -20,7 +20,7 @@
             
             <div class="card shadow-sm">
                 @if($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}" style="max-height: 400px; object-fit: cover;">
                 @endif
                 
                 <div class="card-body">

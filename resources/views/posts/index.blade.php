@@ -38,7 +38,7 @@
                 @foreach($posts as $post)
                     <div class="card mb-4">
                         @if($post->image)
-                            <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+                            <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 250px; object-fit: cover;">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>

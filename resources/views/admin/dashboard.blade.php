@@ -59,7 +59,12 @@
                         <tbody>
                             @forelse ($recent_posts ?? [] as $post)
                                 <tr>
-                                    <td>{{ Str::limit($post->title, 30) }}</td>
+                                    <td>
+                                        @if($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="img-thumbnail me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                        @endif
+                                        {{ Str::limit($post->title, 30) }}
+                                    </td>
                                     <td>{{ $post->user->name }}</td>
                                     <td><span class="badge bg-primary">{{ ucfirst($post->type) }}</span></td>
                                     <td>{{ $post->created_at->format('M d, Y') }}</td>
@@ -102,7 +107,12 @@
                         <tbody>
                             @forelse ($pending_posts ?? [] as $post)
                                 <tr>
-                                    <td>{{ Str::limit($post->title, 30) }}</td>
+                                    <td>
+                                        @if($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="img-thumbnail me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                        @endif
+                                        {{ Str::limit($post->title, 30) }}
+                                    </td>
                                     <td>{{ $post->user->name }}</td>
                                     <td><span class="badge bg-primary">{{ ucfirst($post->type) }}</span></td>
                                     <td>{{ $post->created_at->format('M d, Y') }}</td>

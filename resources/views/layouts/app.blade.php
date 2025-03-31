@@ -116,7 +116,7 @@
                         <p>Rruga 113<br>Tetovë, Maqedonia e Veriut<br>Phone: (123) 456-7890</p>
                     </div>
                     <div class="col-md-4">
-                        <h5>Quick Links</h5>
+                        <h5></h5>
                         <ul class="list-unstyled">
                             <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
                             <li><a href="{{ route('prayer-times') }}" class="text-white">Kohët e namazeve</a></li>

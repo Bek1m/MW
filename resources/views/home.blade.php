@@ -15,7 +15,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     @if($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 200px; object-fit: cover;">
                     @endif
                     <div class="card-body">
                         <span class="badge bg-primary mb-2">{{ ucfirst($post->type) }}</span>
@@ -40,6 +40,9 @@
                     @foreach($announcements as $post)
                     <div class="card mb-3">
                         <div class="card-body">
+                            @if($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top mb-3" alt="{{ $post->title }}" style="max-height: 200px; object-fit: cover;">
+                            @endif
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ Str::limit(strip_tags($post->content), 150) }}</p>
                             <div class="d-flex justify-content-between">
@@ -62,6 +65,9 @@
                     @foreach($events as $event)
                     <div class="card mb-3">
                         <div class="card-body">
+                            @if($event->image)
+                            <img src="{{ asset('storage/' . $event->image) }}" class="img-thumbnail mb-2" alt="{{ $event->title }}" style="max-height: 100px; object-fit: cover;">
+                            @endif
                             <h5 class="card-title">{{ $event->title }}</h5>
                             <p class="card-text">
                                 <i class="bi bi-calendar"></i> {{ $event->event_date->format('M d, Y - h:i A') }}
@@ -80,6 +86,30 @@
                     <h5 class="mb-0">Kohët e namazeve</h5>
                 </div>
                 <div class="card-body">
+                    @if(isset($todayPrayers))
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Sabahu</span>
+                            <span>{{ $todayPrayers['Fajr'] ?? '5:30 AM' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Dreka</span>
+                            <span>{{ $todayPrayers['Dhuhr'] ?? '1:15 PM' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Ikindija</span>
+                            <span>{{ $todayPrayers['Asr'] ?? '4:45 PM' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Akshami</span>
+                            <span>{{ $todayPrayers['Maghrib'] ?? '7:20 PM' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Jacia</span>
+                            <span>{{ $todayPrayers['Isha'] ?? '8:45 PM' }}</span>
+                        </li>
+                    </ul>
+                    @else
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Sabahu</span>
@@ -102,6 +132,7 @@
                             <span>8:45 PM</span>
                         </li>
                     </ul>
+                    @endif
                     <div class="mt-3 text-center">
                         <a href="{{ route('prayer-times') }}" class="btn btn-sm btn-success">Më shumë</a>
                     </div>

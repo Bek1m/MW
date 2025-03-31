@@ -6,16 +6,16 @@
         <div class="col-md-10">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h2 class="h4 mb-0">Create New Post</h2>
+                    <h2 class="h4 mb-0">Krijo post të ri</h2>
                     <a href="{{ route('posts.index') }}" class="btn btn-light btn-sm">
-                        <i class="bi bi-arrow-left me-1"></i> Back to Posts
+                        <i class="bi bi-arrow-left me-1"></i> Kthehu
                     </a>
                 </div>
                 
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger mb-4">
-                            <strong>Please fix the following errors:</strong>
+                            <strong>Rregulloni gabimet:</strong>
                             <ul class="mb-0 mt-2">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -28,7 +28,7 @@
                         @csrf
                         
                         <div class="mb-4">
-                            <label for="title" class="form-label fw-bold">Title</label>
+                            <label for="title" class="form-label fw-bold">Titull</label>
                             <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" 
                                 id="title" name="title" value="{{ old('title') }}" required>
                             @if ($errors->has('title'))
@@ -38,10 +38,10 @@
                         
                         <div class="row mb-4">
                             <div class="col-md-6">
-                                <label for="type" class="form-label fw-bold">Post Type</label>
+                                <label for="type" class="form-label fw-bold">Tipi</label>
                                 <select class="form-select {{ $errors->has('type') ? 'is-invalid' : '' }}" 
                                     id="type" name="type" required>
-                                    <option value="" disabled {{ old('type') ? '' : 'selected' }}>Select post type</option>
+                                    <option value="" disabled {{ old('type') ? '' : 'selected' }}>Zgjidh</option>
                                     @foreach($types ?? ['announcement', 'event', 'sermon', 'news'] as $type)
                                         <option value="{{ $type }}" {{ old('type') == $type ? 'selected' : '' }}>
                                             {{ ucfirst($type) }}
@@ -54,7 +54,7 @@
                             </div>
                             
                             <div class="col-md-6 event-date-field" style="display: none;">
-                                <label for="event_date" class="form-label fw-bold">Event Date & Time</label>
+                                <label for="event_date" class="form-label fw-bold">Koha dhe data</label>
                                 <input type="datetime-local" 
                                     class="form-control {{ $errors->has('event_date') ? 'is-invalid' : '' }}" 
                                     id="event_date" name="event_date" value="{{ old('event_date') }}">
@@ -65,7 +65,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <label for="categories" class="form-label fw-bold">Categories</label>
+                            <label for="categories" class="form-label fw-bold">Kategoritë</label>
                             <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple>
                                 @forelse($categories ?? [] as $category)
                                     <option value="{{ $category->id }}" 
@@ -73,17 +73,17 @@
                                         {{ $category->name }}
                                     </option>
                                 @empty
-                                    <option disabled>No categories available</option>
+                                    <option disabled>Kategoritë nuk ekzistojnë</option>
                                 @endforelse
                             </select>
                             @if ($errors->has('categories'))
                                 <div class="invalid-feedback">{{ $errors->first('categories') }}</div>
                             @endif
-                            <div class="form-text">Hold Ctrl (PC) or Command (Mac) to select multiple categories.</div>
+                            <div class="form-text">Shtyp Ctrl (PC) ose Command (Mac) për më shumë kategori.</div>
                         </div>
                         
                         <div class="mb-4">
-                            <label for="content" class="form-label fw-bold">Content</label>
+                            <label for="content" class="form-label fw-bold">Përmbajtja</label>
                             <textarea class="form-control {{ $errors->has('content') ? 'is-invalid' : '' }}" 
                                 id="content" name="content" rows="8" required>{{ old('content') }}</textarea>
                             @if ($errors->has('content'))
@@ -92,24 +92,24 @@
                         </div>
                         
                         <div class="mb-4">
-                            <label for="image" class="form-label fw-bold">Featured Image</label>
+                            <label for="image" class="form-label fw-bold">Fotografi</label>
                             <input type="file" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" 
                                 id="image" name="image" accept="image/*">
                             @if ($errors->has('image'))
                                 <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                             @endif
-                            <div class="form-text">Optional. Recommended size: 1200x600px, max 2MB.</div>
+                            <div class="form-text">Opsionale</div>
                         </div>
                         
                         <div class="border rounded p-3 bg-light mb-4">
-                            <h5>Publishing Options</h5>
+                            <h5>Opcionet e publikimit</h5>
                             
                             @if(auth()->check() && auth()->user()->is_admin)
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="is_featured" 
                                         name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="is_featured">
-                                        Feature this post on the homepage
+                                        Të duket në faqen kryesore
                                     </label>
                                 </div>
                                 
@@ -117,7 +117,7 @@
                                     <input type="checkbox" class="form-check-input" id="is_approved" 
                                         name="is_approved" value="1" {{ old('is_approved', '1') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="is_approved">
-                                        Approve and publish immediately
+                                        Aprovo dhe publiko menjëherë
                                     </label>
                                 </div>
                             @else
@@ -130,10 +130,10 @@
                         
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">
-                                <i class="bi bi-x-circle me-1"></i> Cancel
+                                <i class="bi bi-x-circle me-1"></i> Anulo
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle me-1"></i> Create Post
+                                <i class="bi bi-check-circle me-1"></i> Krijo
                             </button>
                         </div>
                     </form>
